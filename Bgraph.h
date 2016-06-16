@@ -16,7 +16,7 @@ public:
 	buildgraph(){}
 	~buildgraph(){ delete g; }
 	void mincut(Mat &mask, const Mat &img, const Mat &bg, const Mat &fg);//根据图片的前景和背景模型进行最小化分割，结果保存在mask中
-public:
+private:
 	void initparam(const Mat &bg, const Mat &fg,const Mat &img);
 	void calbeta(const Mat &img);//计算beta的值
 	void calborderweight(const Mat &img);//计算像素点与领域之间边的权重

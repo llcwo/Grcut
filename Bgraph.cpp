@@ -149,8 +149,8 @@ double buildgraph::calplainweight(const Vec3b &point, int label)
 	{
 		sum += calsingleweight(label ? foreg : backg, i,point);
 	}
-	//return -log(sum);
-	return sum;
+	return -log(sum);
+	//return sum;
 }
 double buildgraph::calsingleweight(const Mat &model, int label,const Vec3b &point)
 {
@@ -179,14 +179,14 @@ double buildgraph::calsingleweight(const Mat &model, int label,const Vec3b &poin
 		cout << "cov:" << cov << endl;
 		cout << "coefs:" << coefs << endl;
 	}*/
-	result += -log(coefs);
-	result += log(determinant(cov)) / 2;//行列式的值
+	//result += -log(coefs);
+	//result += log(determinant(cov)) / 2;//行列式的值
 	//inv = cov.inv();
 	
 	Mat temp=mean*(cov.inv())*(mean.t());
 	//det = temp.at<double>(0, 0);
-	result += temp.at<double>(0, 0) / 2;
-	//result = coefs*1.0f / sqrt(determinant(cov))*exp(-0.5*temp.at<double>(0,0));
+	//result += temp.at<double>(0, 0) / 2;
+	result = coefs*1.0f / sqrt(determinant(cov))*exp(-0.5*temp.at<double>(0,0));
 
 
 	return result;
